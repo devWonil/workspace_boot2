@@ -35,7 +35,7 @@ public class UserInfoClient {
 		// 2. B
 //		UserInfoOracleDao oracleDao = new UserInfoOracleDao();
 //		oracleDao.inserUserInfo(info);
-		String str = new String("mysql");
+		String str = scn.nextLine();
 		
 		// equls는 문자열의 값을 비교합니다
 		// == 객체의 주소값을 비교합니다
@@ -53,7 +53,7 @@ public class UserInfoClient {
 		
 		UserInfoDao userInfoDao;
 		
-		if(str.equals(MYORACLE)) {
+		if(str.equals(MYSQL)) {
 			userInfoDao = new UserInfoMySqlDao();
 		}
 		else {
