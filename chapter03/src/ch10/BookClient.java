@@ -9,7 +9,7 @@ public class BookClient {
 	Scanner scn = new Scanner(System.in);
 	
 	//사용자한테 Book 객체를 생성하는 메소드 기능을 만든다
-	public Book createBookObj() {
+	public Book createBook() {
 		System.out.println("책 생성해주세요");
 		int bookId = scn.nextInt();
 		String bookTitle = scn.next();
@@ -19,17 +19,31 @@ public class BookClient {
 	}
 	
 	//책정보 확인
-	public void showBookInfo(int index) {
+	public Book showBookInfo() {
+		System.out.print("확인할 책 번호 입력하세요 : ");
+		int bookId = scn.nextInt();
+		String bookTitle = null;
+		String author = null;
 		
+		return new Book(bookId, bookTitle, author);
 	}
 	
 	//삭제
-	public void deleteBook(String title) {
+	public Book deleteBook(String title) {
+		System.out.println("삭제할 책 번호 입력하세요 : ");
+		int bookId = scn.nextInt();
 		
+		return new Book(bookId, null, null);
 	}
 	
 	//수정
-	public void updateBook(int index, Book book) {
+	public Book updateBook(int index, Book book) {
+		System.out.println("수정할 책 번호 입력하세요 : ");
+		int bookId = scn.nextInt();
+		String bookTitle = scn.next();
+		String author = scn.next();
+		
+		return new Book(bookId, bookTitle, author);
 		
 	}
 }
