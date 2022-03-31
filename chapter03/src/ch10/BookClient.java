@@ -22,8 +22,8 @@ public class BookClient {
 	public Book showBookInfo() {
 		System.out.print("확인할 책 번호 입력하세요 : ");
 		int bookId = scn.nextInt();
-		String bookTitle = null;
-		String author = null;
+		String bookTitle = "";
+		String author = "";
 		
 		return new Book(bookId, bookTitle, author);
 	}
@@ -33,7 +33,7 @@ public class BookClient {
 		System.out.println("삭제할 책 번호 입력하세요 : ");
 		int bookId = scn.nextInt();
 		
-		return new Book(bookId, null, null);
+		return new Book(bookId, "", "");
 	}
 	
 	//수정
