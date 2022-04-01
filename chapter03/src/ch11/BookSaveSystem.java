@@ -2,14 +2,14 @@ package ch11;
 
 import java.util.Scanner;
 
-public class MainTest {
+public class BookSaveSystem {
 
 	public static void main(String[] args) {
 		
 		BookClient bookClient = new BookClient();
 		// 다형성
-		//BookService bookArrayList = new BookArrayList();
-		BookService bookArrayList = new BookArray();
+		BookService bookArrayList = new BookArrayList();
+		//BookService bookArrayList = new BookArray();
 		
 		Book book1 = new Book("홍길동전1", "홍길동1", 1);
 		Book book2 = new Book("홍길동전2", "홍길동2", 2);

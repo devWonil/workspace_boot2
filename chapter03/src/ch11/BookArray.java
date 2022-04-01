@@ -7,10 +7,10 @@ public class BookArray implements BookService{
 
 	@Override
 	public void addBook(Book book) {
-		for (int i = 0; i < books.length; i++) {
-			if(books[i] != null) {
-				continue;
-			}else {
+		for (int i = 0; i < shelfSize; i++) {
+
+			while(books[i] == null)
+			{
 				books[i] = book;
 				showAllBook();
 				return;
@@ -21,53 +21,59 @@ public class BookArray implements BookService{
 
 	@Override
 	public void updateBook(String title, Book book) {
-		for (int i = 0; i < books.length; i++) {
-			if(books[i] == null) {
-				continue;
-			}else if(books[i].getTitle().equals(title)) {
+		
+		for (int i = 0; i < shelfSize; i++) {
+
+			while(books[i].getTitle().equals(title)) 
+			{
 				books[i] = book;
 				showAllBook();
 				return;
 			}
+			continue;
 		}
+		
 		System.out.println( title + " 책이 없습니다.");
 	}
 
 	@Override
 	public void deleteBook(String title) {
-		for (int i = 0; i < books.length; i++) {
-			if(books[i] == null) {
-				continue;		
-			}else if(books[i].getTitle().equals(title));
+		for (int i = 0; i < shelfSize; i++) {
+
+			while(books[i].getTitle().equals(title)) {
 				books[i] = null;
 				showAllBook();
-				return;
+				System.out.println( title + " 책을 삭제하였습니다.");
+				return;	
+			}
+			continue;
 		}
-		System.out.println( title + " 책을 삭제하였습니다.");
+		
 	}
 
 
 	@Override
 	public void selectedByTitleBook(String title) {
-		for (int i = 0; i < books.length; i++) {
-			if(books[i] == null) {
-				continue;	
-			}else if(books[i].getTitle().equals(title)){
+		for (int i = 0; i < shelfSize; i++) {
+
+			while(books[i].getTitle().equals(title)) {
 				System.out.println(books[i]);
 				return;
 			}
+			continue;
 		}
 		System.out.println( title + " 책이 없습니다.");
 	}
 
 	@Override
 	public void showAllBook() {
-		for (int i = 0; i < books.length; i++) {
+		for (int i = 0; i < shelfSize; i++) {
 			if(books[i] == null) {
 				continue;
 			}else {
 				System.out.println(books[i]);
 			}
+			
 		}
 	}
 	
