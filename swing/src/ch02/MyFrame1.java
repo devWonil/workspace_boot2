@@ -37,7 +37,7 @@ public class MyFrame1 extends JFrame{
 		setLayout(borderLayout);
 		
 		for (int i = 0; i < buttons.length; i++) {
-			add(buttons[0], directions[0]);
+			add(buttons[i], directions[i]);
 		}
 	}
 }
