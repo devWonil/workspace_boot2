@@ -11,19 +11,7 @@ public class BookSaveSystem {
 		//BookService bookArrayList = new BookArrayList();
 		BookService bookArrayList = new BookArray();
 		
-		Book book1 = new Book("홍길동전1", "홍길동1", 1);
-		Book book2 = new Book("홍길동전2", "홍길동2", 2);
-		Book book3 = new Book("홍길동전3", "홍길동3", 3);
-		Book book4 = new Book("홍길동전4", "홍길동4", 4);
-		Book book5 = new Book("홍길동전5", "홍길동5", 5);
-		Book book6 = new Book("홍길동전6", "홍길동6", 6);
 		
-		bookArrayList.addBook(book1);
-		bookArrayList.addBook(book2);
-		bookArrayList.addBook(book3);
-		bookArrayList.addBook(book4);
-		bookArrayList.addBook(book5);
-		bookArrayList.addBook(book6);
 		Scanner scanner = new Scanner(System.in);
 		String selectedMenu = "";
 		

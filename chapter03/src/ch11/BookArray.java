@@ -5,6 +5,7 @@ public class BookArray implements BookService {
 	int shelfSize = 10;
 	Book[] books = new Book[shelfSize];
 
+
 	@Override
 	public void addBook(Book book) {
 		for (int i = 0; i < shelfSize; i++) {
