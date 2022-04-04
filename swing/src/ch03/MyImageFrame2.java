@@ -10,42 +10,42 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class MyImageFrame2 extends JFrame{
+public class MyImageFrame2 extends JFrame {
 
 	// 코드를 조금 수정해주세요
 	// 상수, static 활용해서 처리해주세요
-	
+
 	static BufferedImage backgroundImage;
 	static BufferedImage imageIcon;
 //	private MyImagePanel myImagePanel;
 //	private JButton button;
-	
+
 	public MyImageFrame2() {
 		initData();
 		setInitLayout();
 	}
-	
+
 	private void initData() {
 		setTitle("이미지 백그라운드 연습");
 		setSize(500, 500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		try {
 			backgroundImage = ImageIO.read(new File("image1.jpg"));
 			imageIcon = ImageIO.read(new File("icon2.png"));
 		} catch (IOException e) {
 			System.out.println("파일이 없습니다");
 		}
-		
-		//myImagePanel = new MyImagePanel();
+
+		// myImagePanel = new MyImagePanel();
 	}
-	
+
 	private void setInitLayout() {
 		setVisible(true);
 		setResizable(false);
 		add(new MyImagePanel());
 	}
-	
+
 	private class MyImagePanel extends JPanel {
 		@Override
 		protected void paintComponent(Graphics g) {
@@ -55,6 +55,14 @@ public class MyImageFrame2 extends JFrame{
 			g.drawImage(imageIcon, 0, 0, 100, 100, null);
 		}
 	} // end of inner class
-	
-	
+
+	// 메인 함수
+	public static void main(String[] args) {
+		new MyImageFrame2();
+
+	} // end of main
+
+	public void addEventListener() {
+		System.out.println("브랜치를 만들었습니다");
+	}
 } // end of outer class
