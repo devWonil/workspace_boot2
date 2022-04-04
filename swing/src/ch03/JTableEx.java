@@ -10,7 +10,7 @@ public class JTableEx extends JFrame{
 	
 	public JTableEx() {
 		initData();
-		setInitData();
+		setInitLayout();
 	}
 	
 	private void initData() {
@@ -28,7 +28,7 @@ public class JTableEx extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	private void setInitData() {
+	private void setInitLayout() {
 		setVisible(true);
 	}
 	
