@@ -40,4 +40,6 @@ public class MyFrame1 extends JFrame{
 			add(buttons[i], directions[i]);
 		}
 	}
+	
+	
 }

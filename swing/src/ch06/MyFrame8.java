@@ -1,7 +1,6 @@
 package ch06;
 
 import java.awt.Graphics;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -18,6 +17,8 @@ public class MyFrame8 extends JFrame implements KeyListener{
 	private BufferedImage imageIcon;
 	private ImagePanel imagePanel;
 	
+	int xPoint = 200;
+	int yPoint = 200;
 	// 이벤트 리스너 등록 1, 2, 3
 	public MyFrame8() {
 		initData();
@@ -27,7 +28,7 @@ public class MyFrame8 extends JFrame implements KeyListener{
 
 	private void initData() {
 		setTitle("축구장에서 움직이는 공");
-		setSize(600, 600);
+		setSize(500, 500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		try {
@@ -37,62 +38,28 @@ public class MyFrame8 extends JFrame implements KeyListener{
 			System.out.println("파일이 없습니다");
 		}
 		
-		imagePanel = new MyImagePanel();
+		imagePanel = new ImagePanel();
 	}
 
 	private void setInitLayout() {
 		setVisible(true);
 		setResizable(false);
-		setLayout(null);
-		
 		add(imagePanel);
 	}
 
-	private class MyImagePanel extends JPanel {
+	private void addEventListener() {
+		this.addKeyListener(this);
+
+	}
+	
+	private class ImagePanel extends JPanel {
 		@Override
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			// 이미지 2개를 그려주는 기능을 완료
-			g.drawImage(bgImage, 0, 0, 600, 600, null);
-			g.drawImage(imageIcon, 0, 0, 100, 100, null);
+			g.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
+			g.drawImage(imageIcon, xPoint, yPoint, 100, 100, null);
 		}
-	}
-
-	private void addEventListener() {
-		this.add(label);
-		this.addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent e) {
-				switch (e.getKeyCode()) {
-				case KeyEvent.VK_UP:
-					label.setLocation(label.getX(), label.getY() - 10);
-					break;
-
-				case KeyEvent.VK_DOWN:
-					label.setLocation(label.getX(), label.getY() + 10);
-					break;
-				case KeyEvent.VK_LEFT:
-					label.setLocation(label.getX() - 10, label.getY());
-					break;
-				case KeyEvent.VK_RIGHT:
-					label.setLocation(label.getX() + 10, label.getY());
-					break;
-
-				}
-
-			}
-		});
-
-	}
-
-	// 내부클래스 선언 - paintComponent
-	@Override
-	public void paint(Graphics g) {
-		super.paintComponents(g);
-
-	}
-
-	public static void main(String[] args) {
-		new MyFrame8();
 	}
 
 	@Override
@@ -103,8 +70,20 @@ public class MyFrame8 extends JFrame implements KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
+		int keyCode = e.getKeyCode();
+		if(keyCode == KeyEvent.VK_UP) {
+			// yPoint -= 10;
+			yPoint = (yPoint < 0) ? 0 : yPoint - 10;
+		}else if(keyCode == KeyEvent.VK_DOWN) {
+			// yPoint += 10;
+			yPoint = (yPoint > bgImage.getHeight()) ? bgImage.getHeight() : yPoint + 10;
+		}else if(keyCode == KeyEvent.VK_LEFT) {
+			xPoint = (xPoint < 0) ? 0 : xPoint - 10;
+		}else if(keyCode == KeyEvent.VK_RIGHT) {
+			xPoint = (xPoint > bgImage.getHeight()) ? bgImage.getHeight() : xPoint + 10;
+		}
 		
+		repaint();
 	}
 
 	@Override
@@ -113,5 +92,8 @@ public class MyFrame8 extends JFrame implements KeyListener{
 		
 	}
 
+	public static void main(String[] args) {
+		new MyFrame8();
+	}
 	
 }

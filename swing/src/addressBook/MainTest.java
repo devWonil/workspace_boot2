@@ -1,9 +1,10 @@
-package ch02;
+package addressBook;
 
 public class MainTest {
 
 	public static void main(String[] args) {
-		new MyFrame1();
+		new MainFrame();
+
 	}
 
 }
