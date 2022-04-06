@@ -26,7 +26,7 @@ class MyRunnable2 extends JFrame {
 	
 	// 생성자
 	public MyRunnable2() {
-		//runnable.run();
+		runnable.run();
 	}
 }
 

@@ -4,7 +4,7 @@ public class MainTest {
 
 	public static void main(String[] args) {
 		
-		new EventListener2();
+		new EventListener3();
 	}
 
 }
