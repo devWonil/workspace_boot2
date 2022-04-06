@@ -68,7 +68,6 @@ public class MainFrame extends JFrame {
 
 		topPanel.add(homeButton);
 		topPanel.add(menuPanel);
-		
 
 		backGroundPanel.add(topPanel, BorderLayout.NORTH);
 		backGroundPanel.add(listPanel, BorderLayout.CENTER);
