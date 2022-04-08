@@ -1,4 +1,4 @@
-package tenco.com.test_07;
+package tenco.com.test_11;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -6,8 +6,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-import tenco.com.test_11.PlayerWay;
 
 public class BubbleFrame extends JFrame {
 
@@ -19,6 +17,7 @@ public class BubbleFrame extends JFrame {
 		initSetting();
 		initListener();
 		setVisible(true);
+
 	}
 
 	private void initObject() {
@@ -45,12 +44,12 @@ public class BubbleFrame extends JFrame {
 
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_LEFT:
-					if (!player.isLeft()) {
+					if (!player.isLeft() && !player.isLeftWallCrash()) {
 						player.left();
 					}
 					break;
 				case KeyEvent.VK_RIGHT:
-					if (!player.isRight()) {
+					if (!player.isRight() && !player.isRightWallCrash()) {
 						player.right();
 					}
 					break;
@@ -58,14 +57,12 @@ public class BubbleFrame extends JFrame {
 					if (!player.isUp() && !player.isDown()) {
 						player.up();
 					}
-					break;
 				case KeyEvent.VK_SPACE:
-					System.out.println(player.getPlayerWay());
-					if(PlayerWay.LEFT == player.getPlayerWay()) {
-						System.out.println("왼쪽방향을 보고 있습니다");
-					}else {
-						System.out.println("오른쪽방향을 보고 있습니다");
-					}
+				if(PlayerWay.LEFT == player.getPlayerWay()) {
+					System.out.println("왼쪽을 바라봅니다");
+				}else {
+					System.out.println("오른쪽을 바라봅니다");
+				}
 					break;
 				}
 			} // end of keyPressed

@@ -1,9 +1,7 @@
-package tenco.com.test_07;
+package tenco.com.test_11;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
-import tenco.com.test_11.PlayerWay;
 
 public class Player extends JLabel implements Moveable {
 
@@ -11,8 +9,8 @@ public class Player extends JLabel implements Moveable {
 	private int x;
 	private int y;
 
-	// 플레이어의 방향
-	private PlayerWay playerWay;
+	// 플레이어 상태
+	PlayerWay playerWay;
 
 	// 움직임 상태
 	private boolean left;
@@ -24,8 +22,36 @@ public class Player extends JLabel implements Moveable {
 	private final int SPEED = 3;
 	private final int JUMPSPEED = 2;
 
+	// 벽에 충돌한 상태
+	private boolean leftWallCrash;
+	private boolean rightWallCrash;
+
 	private ImageIcon playerR;
 	private ImageIcon playerL;
+
+	public boolean isLeftWallCrash() {
+		return leftWallCrash;
+	}
+
+	public void setLeftWallCrash(boolean leftWallCrash) {
+		this.leftWallCrash = leftWallCrash;
+	}
+
+	public boolean isRightWallCrash() {
+		return rightWallCrash;
+	}
+
+	public void setRightWallCrash(boolean rightWallCrash) {
+		this.rightWallCrash = rightWallCrash;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
 
 	public void setLeft(boolean left) {
 		this.left = left;
@@ -86,6 +112,11 @@ public class Player extends JLabel implements Moveable {
 	public Player() {
 		initObject();
 		initSetting();
+		initBackgroundPlayerService();
+	}
+
+	private void initBackgroundPlayerService() {
+		new Thread(new BackgroundPlayerService(this)).start();
 	}
 
 	private void initObject() {
@@ -102,6 +133,9 @@ public class Player extends JLabel implements Moveable {
 		up = false;
 		down = false;
 
+		leftWallCrash = false;
+		rightWallCrash = false;
+
 		playerWay = PlayerWay.RIGHT;
 
 		setIcon(playerR);
@@ -112,8 +146,8 @@ public class Player extends JLabel implements Moveable {
 	// 이벤트 핸들러
 	@Override
 	public void left() {
-		System.out.println("left");
 		playerWay = PlayerWay.LEFT;
+		System.out.println("left");
 		left = true;
 		new Thread(new Runnable() {
 
@@ -136,9 +170,10 @@ public class Player extends JLabel implements Moveable {
 
 	@Override
 	public void right() {
-		System.out.println("right");
 		playerWay = PlayerWay.RIGHT;
+		System.out.println("right");
 		right = true;
+
 		new Thread(new Runnable() {
 
 			@Override
@@ -194,16 +229,27 @@ public class Player extends JLabel implements Moveable {
 
 			@Override
 			public void run() {
-				for (int i = 0; i < (130 / JUMPSPEED); i++) {
+//				for (int i = 0; i < (130 / JUMPSPEED); i++) {
+//					y += JUMPSPEED;
+//					setLocation(x, y);
+//					try {
+//						Thread.sleep(3);
+//					} catch (InterruptedException e) {
+//						e.printStackTrace();
+//					}
+//				}
+//
+//				down = false;
+				while (down) {
 					y += JUMPSPEED;
 					setLocation(x, y);
 					try {
 						Thread.sleep(3);
 					} catch (InterruptedException e) {
-						e.printStackTrace();
+						// e.printStackTrace();
 					}
-				}
 
+				}
 				down = false;
 			}
 

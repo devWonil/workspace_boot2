@@ -1,4 +1,4 @@
-package tenco.com.test_10;
+package tenco.com.test_11;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
