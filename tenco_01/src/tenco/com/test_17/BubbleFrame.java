@@ -59,8 +59,8 @@ public class BubbleFrame extends JFrame {
 				case KeyEvent.VK_UP:
 					if (!player.isUp() && !player.isDown()) {
 						player.up();
-					break;
 					}
+					break;
 				case KeyEvent.VK_SPACE:
 //					Bubble bubble = new Bubble(player);
 //					Bubble bubble = new Bubble(mContext);

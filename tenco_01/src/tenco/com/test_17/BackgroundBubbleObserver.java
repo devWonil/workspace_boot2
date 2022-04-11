@@ -42,7 +42,6 @@ public class BackgroundBubbleObserver {
 
 	public boolean checkTopWall() {
 		// 3단계
-		
 		return isCrashColor(CENTER_TOP);
 	}
 	

@@ -3,6 +3,9 @@ package tenco.com.test_17;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import lombok.Data;
+
+@Data
 public class Player extends JLabel implements Moveable {
 
 	// 위치 상태
@@ -29,85 +32,7 @@ public class Player extends JLabel implements Moveable {
 	private ImageIcon playerR;
 	private ImageIcon playerL;
 
-	public boolean isLeftWallCrash() {
-		return leftWallCrash;
-	}
-
-	public void setLeftWallCrash(boolean leftWallCrash) {
-		this.leftWallCrash = leftWallCrash;
-	}
-
-	public boolean isRightWallCrash() {
-		return rightWallCrash;
-	}
-
-	public void setRightWallCrash(boolean rightWallCrash) {
-		this.rightWallCrash = rightWallCrash;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	public void setLeft(boolean left) {
-		this.left = left;
-	}
-
-	public void setRight(boolean right) {
-		this.right = right;
-	}
-
-	public void setUp(boolean up) {
-		this.up = up;
-	}
-
-	public void setDown(boolean down) {
-		this.down = down;
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public boolean isLeft() {
-		return left;
-	}
-
-	public boolean isRight() {
-		return right;
-	}
-
-	public boolean isUp() {
-		return up;
-	}
-
-	public boolean isDown() {
-		return down;
-	}
-
-	public ImageIcon getPlayerR() {
-		return playerR;
-	}
-
-	public ImageIcon getPlayerL() {
-		return playerL;
-	}
-
-	public PlayerWay getPlayerWay() {
-		return playerWay;
-	}
-
-	public void setPlayerWay(PlayerWay playerWay) {
-		this.playerWay = playerWay;
-	}
+	
 
 	public Player() {
 		initObject();

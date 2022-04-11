@@ -3,6 +3,9 @@ package tenco.com.test_17;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import lombok.Data;
+
+@Data
 public class Bubble extends JLabel implements Moveable {
 
 	// 2단계
@@ -29,86 +32,7 @@ public class Bubble extends JLabel implements Moveable {
 	private ImageIcon bubbled; // 적을 가둔 물방울
 	private ImageIcon bomb; // 물방울이 터진 상태
 
-	public Player getPlayer() {
-		return player;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	public boolean isLeft() {
-		return left;
-	}
-
-	public void setLeft(boolean left) {
-		this.left = left;
-	}
-
-	public boolean isRight() {
-		return right;
-	}
-
-	public void setRight(boolean right) {
-		this.right = right;
-	}
-
-	public boolean isUp() {
-		return up;
-	}
-
-	public void setUp(boolean up) {
-		this.up = up;
-	}
-
-	public int getState() {
-		return state;
-	}
-
-	public void setState(int state) {
-		this.state = state;
-	}
-
-	public ImageIcon getBubble() {
-		return bubble;
-	}
-
-	public void setBubble(ImageIcon bubble) {
-		this.bubble = bubble;
-	}
-
-	public ImageIcon getBubbled() {
-		return bubbled;
-	}
-
-	public void setBubbled(ImageIcon bubbled) {
-		this.bubbled = bubbled;
-	}
-
-	public ImageIcon getBomb() {
-		return bomb;
-	}
-
-	public void setBomb(ImageIcon bomb) {
-		this.bomb = bomb;
-	}
-
+	
 	// 의존 주입 --> 생성자에 주입을 받는다
 	public Bubble(Player player) {
 		this.player = player;
@@ -162,12 +86,12 @@ public class Bubble extends JLabel implements Moveable {
 			setLocation(x, y);
 			// 현재 색상 체크 (메소드 호출)
 			if(backgroundBubbleObserver.checkLeftWall()) {
-				left = false; // 초기화
+				left = false; // 상태변수 초기화
 				break;
 			}
 			threadSleep(1);
 		}
-		left = false; // 초기화
+		left = false; // 상태변수 초기화
 		up();
 	}
 
@@ -178,12 +102,12 @@ public class Bubble extends JLabel implements Moveable {
 			x++;
 			setLocation(x, y);
 			if(backgroundBubbleObserver.checkRightWall()) {
-				right = false; // 초기화
+				right = false; // 상태변수 초기화
 				break;
 			}
 			threadSleep(1);
 		}
-		right = false; // 초기화
+		right = false; // 상태변수 초기화
 		up();
 	}
 
@@ -194,12 +118,12 @@ public class Bubble extends JLabel implements Moveable {
 			y--;
 			setLocation(x, y);
 			if(backgroundBubbleObserver.checkTopWall()) {
-				up = false; // 초기화
+				up = false; // 상태변수 초기화
 				break;
 			}
 			threadSleep(1);
 		}
-		up = false; // 초기화
+		up = false; // 상태변수 초기화
 		removeBubble();
 	}
 
