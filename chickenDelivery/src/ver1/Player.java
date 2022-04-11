@@ -145,7 +145,9 @@ public class Player extends JLabel implements Moveable {
 
 	
 	public Player() {
-		// TODO Auto-generated constructor stub
+		initObject();
+		initSetting();
+		initBackgroundMapServiceFrame();
 	}
 	
 	private void initBackgroundMapServiceFrame() {
@@ -153,11 +155,15 @@ public class Player extends JLabel implements Moveable {
 	}
 	
 	private void initObject() {
-		
+		playerR = new ImageIcon("images/right");
+		playerL = new ImageIcon("images/left");
 	}
 	
 	private void initSetting() {
 		
+		setIcon(playerR);
+		setSize(50, 50);
+		setLocation(x, y);
 	}
 	
 	@Override
