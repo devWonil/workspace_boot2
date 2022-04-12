@@ -151,7 +151,7 @@ public class Player extends JLabel implements Moveable {
 	}
 	
 	private void initBackgroundMapServiceFrame() {
-		new Thread(new BackgroundMapServiceFrame()).start();
+//		new Thread(new BackgroundMapServiceFrame()).start();
 	}
 	
 	private void initObject() {

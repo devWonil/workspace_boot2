@@ -8,24 +8,28 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class BackgroundMapFrame extends JFrame implements ActionListener{
+	// 현재 화면에 띄워진 맵
+	private JLabel backgroundImg;
 	
-	private BufferedImage bgImage;
-	private BufferedImage image2;
+	// 배달 맵
+	private JLabel deliveryMapImg;
+	// 주방 맵
+	private BufferedImage kitchenMapImg;
 	
 	private String bgImageFileName = "images/kitService2.png";
-	private String image2FileName = "images/LoopyKit_left.png";
 	
 	private JButton changeBtn;
 	private JPanel bottomPanel;
+	
+	private Player player;
 	
 	private CustomJpanel customJPanel;
 	
@@ -48,15 +52,18 @@ public class BackgroundMapFrame extends JFrame implements ActionListener{
 		setTitle("치킨배달");
 		setSize(1000, 800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		player = new Player();
+		backgroundImg = new JLabel(new ImageIcon("images/kitService2.png"));
+		deliveryMapImg = new JLabel(new ImageIcon("images/delService.png"));
+		
 		changeBtn = new JButton("배달");
 		
 		//파일 가져오기 todo
-		try {
-			bgImage = ImageIO.read(new File(bgImageFileName));
-			image2 = ImageIO.read(new File(image2FileName));
-		} catch (IOException e) {
-			System.out.println("파일이 없습니다");
-		}
+//		try {
+//			//backgroundImg = ImageIO.read(new File(bgImageFileName));
+//		} catch (IOException e) {
+//			System.out.println("파일이 없습니다");
+//		}
 		customJPanel = new CustomJpanel();
 		
 		bottomPanel = new JPanel(new FlowLayout());
@@ -66,12 +73,17 @@ public class BackgroundMapFrame extends JFrame implements ActionListener{
 	private void setInitLayout() {
 		
 		bottomPanel.add(changeBtn);
+		//customJPanel.add(deliveryMapImg);
+		customJPanel.add(backgroundImg);
 		
 		add(customJPanel, BorderLayout.CENTER);
 		add(bottomPanel, BorderLayout.SOUTH);
 		
+		backgroundImg.setVisible(true);
+		deliveryMapImg.setVisible(true);
+		
 		setVisible(true);
-		//setResizable(false);
+		setResizable(false);
 		
 		//add(imagePanel);
 		this.requestFocusInWindow();
@@ -92,11 +104,11 @@ public class BackgroundMapFrame extends JFrame implements ActionListener{
 					yPoint = (yPoint < 0) ? 0 : yPoint - 10;
 				}else if(keyCode == KeyEvent.VK_DOWN) {
 					// yPoint += 10;
-					yPoint = (yPoint > bgImage.getHeight()) ? bgImage.getHeight() : yPoint + 10;
+					yPoint = (yPoint > backgroundImg.getHeight()) ? backgroundImg.getHeight() : yPoint + 10;
 				}else if(keyCode == KeyEvent.VK_LEFT) {
 					xPoint = (xPoint < 0) ? 0 : xPoint - 10;
 				}else if(keyCode == KeyEvent.VK_RIGHT) {
-					xPoint = (xPoint > bgImage.getHeight()) ? bgImage.getHeight() : xPoint + 10;
+					xPoint = (xPoint > backgroundImg.getHeight()) ? backgroundImg.getHeight() : xPoint + 10;
 				}
 				
 				repaint();
@@ -113,8 +125,8 @@ public class BackgroundMapFrame extends JFrame implements ActionListener{
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			// 이미지를 3개 그리기
-			g.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
-			g.drawImage(image2, xPoint, yPoint, 55, 80, null);
+			//g.drawImage(backgroundImg, 0, 0, getWidth(), getHeight(), null);
+//			g.drawImage(image2, xPoint, yPoint, 55, 80, null);
 		}
 
 		@Override
@@ -128,9 +140,14 @@ public class BackgroundMapFrame extends JFrame implements ActionListener{
 		JButton targetBtn = (JButton)e.getSource();
 		if (changeBtn == targetBtn) {
 			System.out.println("신속배달");
+			deliveryMapImg.setVisible(true);
+			customJPanel.add(deliveryMapImg);
+			backgroundImg.setVisible(false);
 		}
 		this.requestFocusInWindow();
 	}
 	
-	
+	public static void main(String[] args) {
+		new BackgroundMapFrame();
+	}
 }
