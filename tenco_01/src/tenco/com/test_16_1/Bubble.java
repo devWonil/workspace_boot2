@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import lombok.Data;
+import tenco.com.test_16.BubbleFrame;
 import tenco.com.test_16.PlayerWay;
 
 @Data //롬복 라이브러리 활용 (Getters, Setters 선언하지 않아도 돼서 코드를 줄여줌)
@@ -32,7 +33,7 @@ public class Bubble extends JLabel implements Moveable {
 	private ImageIcon bubbled; // 적을 가둔 물방울
 	private ImageIcon bomb; // 물방울이 터진 상태
 
-	public Bubble() {
+	public Bubble(BubbleFrame mContext) {
 		this.mContext = mContext;
 		this.player = mContext.player;
 		initObject();

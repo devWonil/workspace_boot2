@@ -33,6 +33,7 @@ public class Player extends JLabel implements Moveable {
 	private ImageIcon playerR;
 	private ImageIcon playerL;
 	
+	// 게터 세터
 	public int getX() {
 		return x;
 	}
@@ -141,11 +142,11 @@ public class Player extends JLabel implements Moveable {
 	}
 	
 	private void initObject() {
-		playerL = new ImageIcon("images/playerL.png");
+		playerL = new ImageIcon("images/playerL.png"); //이미지 파일
 		playerR = new ImageIcon("images/playerR.png");
 	}
 	
-	private void initSetting() {
+	private void initSetting() { //초기값 세팅
 		x = 80;
 		y = 535;
 		
@@ -252,7 +253,7 @@ public class Player extends JLabel implements Moveable {
 			@Override
 			public void run() {
 				while(down) {
-					y += JUMPSPEED;
+					y += JUMPSPEED; // 점프스피드만큼 y좌표 아래로 이동
 					setLocation(x, y);
 					try {
 						Thread.sleep(3);
