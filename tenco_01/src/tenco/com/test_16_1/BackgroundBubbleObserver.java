@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 // 느려져서 스레드로 만들지 않음
 public class BackgroundBubbleObserver {
 
+	// 수정값
 	private static int LEFT_XPOINT = 0;
 	private static int RIGHT_XPOINT = 60;
 	private static int CENTER_TOP = 25;

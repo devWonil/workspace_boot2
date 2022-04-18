@@ -4,11 +4,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import lombok.Data;
-import tenco.com.test_16.BubbleFrame;
-import tenco.com.test_16.PlayerWay;
 
 @Data //롬복 라이브러리 활용 (Getters, Setters 선언하지 않아도 돼서 코드를 줄여줌)
-public class Bubble extends JLabel implements Moveable {
+public class Bubble extends JLabel implements Moveable { // JLabel 상속 Moveable 인터페이스 활용
 
 	// 1단계
 	private BubbleFrame mContext;
@@ -48,7 +46,7 @@ public class Bubble extends JLabel implements Moveable {
 		backgroundBubbleObserver = new BackgroundBubbleObserver(this);
 	}
 
-	private void initSetting() {
+	private void initSetting() { // 초기값세팅
 		left = false;
 		right = false;
 		up = false;
@@ -67,7 +65,7 @@ public class Bubble extends JLabel implements Moveable {
 
 			@Override
 			public void run() {
-				if(player.getPlayerWay() == PlayerWay.LEFT) {
+				if(player.getPlayerWay() == PlayerWay.LEFT) { // 플레이어가 왼쪽으로
 					left();
 				}else {
 					right();
@@ -84,14 +82,14 @@ public class Bubble extends JLabel implements Moveable {
 			x--;
 			setLocation(x, y);
 			// 현재 색상 체크 (메소드 호출)
-			if(backgroundBubbleObserver.checkLeftWall()) {
+			if(backgroundBubbleObserver.checkLeftWall()) { // 왼쪽벽 충돌하면
 				left = false; //초기화
 				break;
 			}
 			threadSleep(1);
 		}
 		left = false; //초기화
-		up();
+		up(); // 스레드 다 돌고 버블 상승
 	}
 
 	@Override
@@ -100,14 +98,14 @@ public class Bubble extends JLabel implements Moveable {
 		for (int i = 0; i < 400; i++) {
 			x++;
 			setLocation(x, y);
-			if(backgroundBubbleObserver.checkRightWall()) {
+			if(backgroundBubbleObserver.checkRightWall()) { // 오른쪽벽 충돌하면
 				right = false;// 초기화
 				break;
 			}
 			threadSleep(1);
 		}
 		right = false; //초기화
-		up();
+		up(); // 스레드 다 돌고 버블 상승
 	}
 
 	@Override
@@ -116,7 +114,7 @@ public class Bubble extends JLabel implements Moveable {
 		while(up) {
 			y--;
 			setLocation(x, y);
-			if(backgroundBubbleObserver.checkTopWall()) {
+			if(backgroundBubbleObserver.checkTopWall()) { // 천장충돌하면
 				up = false; // 초기화
 				break;
 			}
@@ -126,7 +124,7 @@ public class Bubble extends JLabel implements Moveable {
 		removeBubble();
 	}
 
-	public void removeBubble() {
+	public void removeBubble() { // 버블 사라지는 메소드
 		
 		try {
 			Thread.sleep(2000);

@@ -1,12 +1,11 @@
 package tenco.com.test_16_1;
 
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-import tenco.com.test_16.Bubble;
 
 public class BubbleFrame extends JFrame{ // JFrame 상속
 
@@ -14,7 +13,7 @@ public class BubbleFrame extends JFrame{ // JFrame 상속
 	private BubbleFrame mContext = this;
 	
 	private JLabel backgroundMap; // JLabel 클래스 멤버변수 선언
-	public Player player;
+	public Player player; 
 	
 	public BubbleFrame() {
 		initObject();
@@ -41,14 +40,14 @@ public class BubbleFrame extends JFrame{ // JFrame 상속
 	
 	private void initListener() {
 		addKeyListener(new KeyAdapter() {
-			// 키보드 누름 이벤트 처리
 			@Override
-			public void KeyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) { // 키보드 눌러졌을 때
 				System.out.println(e.getKeyCode());
 
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_LEFT:
 					if (!player.isLeft() && !player.isLeftWallCrash()) {
+						// 플레이어 움직임상태가 왼쪽이 아니고 왼쪽 벽에 부딪히지 않았다면
 						player.left();
 					}
 					break;
@@ -63,12 +62,12 @@ public class BubbleFrame extends JFrame{ // JFrame 상속
 					break;
 					}
 				case KeyEvent.VK_SPACE:
-					Bubble bubble = new Bubble(mContext);
-					add(bubble);
+					Bubble bubble = new Bubble(mContext); // 버블 객체 안에 mContext
+					add(bubble); // 버블
 					break;
 				}
 			} // end of keyPressed
-			
+
 			// 키보드 해제 이벤트 처리
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -92,7 +91,7 @@ public class BubbleFrame extends JFrame{ // JFrame 상속
 		});
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) { //메인함수
 		new BubbleFrame();
 	}
 }
