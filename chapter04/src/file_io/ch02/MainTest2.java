@@ -28,7 +28,8 @@ public class MainTest2 {
 		} catch (IOException e) {
 			System.out.println("입출력오류");
 		} 
-		
+		System.out.println();
+		System.out.println("끝");
 //		try {
 //			int i;
 //			fis = new FileInputStream("boot_a.txt");
@@ -46,8 +47,7 @@ public class MainTest2 {
 //				e.printStackTrace();
 //			}
 //		}
-		System.out.println();
-		System.out.println("끝");
+		
 	}
 
 }
