@@ -12,7 +12,7 @@ public class BackgroundPlayerService implements Runnable {
 	private BufferedImage image;
 	private Player player;
 	
-	public BackgroundPlayerService(Player player) {
+	public BackgroundPlayerService(Player player) { // 생성자
 		this.player = player;
 		
 		try {

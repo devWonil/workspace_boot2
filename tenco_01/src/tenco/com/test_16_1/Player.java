@@ -4,8 +4,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import lombok.Data;
-import tenco.com.test_14.BackgroundPlayerService;
-import tenco.com.test_16.PlayerWay;
 @Data //롬복 라이브러리 활용 (Getters, Setters 선언하지 않아도 돼서 코드를 줄여줌)
 public class Player extends JLabel implements Moveable {
 
@@ -27,8 +25,8 @@ public class Player extends JLabel implements Moveable {
 	private final int JUMPSPEED = 2;
 	
 	//벽에 충돌한 상태
-	private boolean leftWallCrash;
-	private boolean rightWallCrash;
+	private boolean leftWallCrash; // 왼쪽벽
+	private boolean rightWallCrash; //오른쪽벽
 	
 	private ImageIcon playerR;
 	private ImageIcon playerL;
@@ -147,8 +145,8 @@ public class Player extends JLabel implements Moveable {
 	}
 	
 	private void initSetting() { //초기값 세팅
-		x = 80;
-		y = 535;
+		x = 80; // x좌표
+		y = 535; // y좌표
 		
 		left = false;
 		right = false;
