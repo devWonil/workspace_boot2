@@ -99,7 +99,7 @@ public class Server extends JFrame implements ActionListener {
 		
 		if(e.getSource() == btnServerStart) {
 			if(tfPort.getText().length() == 0) {
-				System.out.println(" 값을 입력하세요 ");
+				JOptionPane.showMessageDialog(null, "포트번호 입력해라", "오류", JOptionPane.ERROR_MESSAGE);
 			}else if(tfPort.getText().length() != 0) {
 				
 				// 값을 가져와서 port변수에 저장

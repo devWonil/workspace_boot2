@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -50,7 +51,11 @@ public class Client extends JFrame implements ActionListener {
 	// network 자원
 	private Socket socket;
 	private String ip;
-	private int port;
+	Random rand = new Random();
+	int maximum = 65535;
+	int minimum = 1024;
+	int randomNum = minimum + rand.nextInt((maximum - minimum) + 1);
+	private int port = randomNum;
 	private String user_id;
 	private InputStream is;
 	private OutputStream os;
@@ -105,6 +110,7 @@ public class Client extends JFrame implements ActionListener {
 		port_tf.setFont(new Font("휴먼모음T", Font.BOLD, 13));
 		port_tf.setBounds(112, 69, 199, 21);
 		panel_1.add(port_tf);
+		port_tf.setText(String.valueOf(port));
 		port_tf.setColumns(10);
 
 		JLabel userID_lbl = new JLabel("User_ID");
