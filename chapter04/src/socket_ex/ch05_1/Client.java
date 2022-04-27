@@ -10,7 +10,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -51,11 +50,8 @@ public class Client extends JFrame implements ActionListener {
 	// network 자원
 	private Socket socket;
 	private String ip;
-	Random rand = new Random();
-	int maximum = 65535;
-	int minimum = 1024;
-	int randomNum = minimum + rand.nextInt((maximum - minimum) + 1);
-	private int port = randomNum;
+	Server server = new Server();
+	private int port = server.getRandomNum();
 	private String user_id;
 	private InputStream is;
 	private OutputStream os;

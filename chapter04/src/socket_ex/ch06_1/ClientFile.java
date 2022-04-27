@@ -13,7 +13,7 @@ public class ClientFile {
 	Socket socket; // 소켓 생성
 	BufferedWriter bufferedWriter; // 소켓에다가 연결할 outPutStream
 	final String IP = "localhost";
-	final int PORT = 10000;
+	final int PORT = 12000;
 
 	BufferedReader keyboardBufferedReader; // 키보드에 연결할 스트림
 
