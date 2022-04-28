@@ -28,8 +28,8 @@ public class ServerFile {
 				// 새로운 소켓 생성 (실제 통신할 부분)
 				while(true) { // 무한대기
 					try {
-						Socket socket = serverSocket.accept();
-						UserSocket userSocket = new UserSocket(mContext, socket);
+						Socket socket = serverSocket.accept(); //접속
+						UserSocket userSocket = new UserSocket(mContext, socket); //유저소켓 객체 생성
 						userSocket.start();
 						sockets.add(userSocket);
 						System.out.println("계속 도나요");
@@ -48,6 +48,7 @@ public class ServerFile {
 	public void broadcast(String msg) {
 		for(int i = 0; i < sockets.size(); i++) {
 			sockets.get(i).sendMessage(msg);
+			System.out.println("1111111111");
 		}
 	}
 	

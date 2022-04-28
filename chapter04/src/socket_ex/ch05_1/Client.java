@@ -50,8 +50,7 @@ public class Client extends JFrame implements ActionListener {
 	// network 자원
 	private Socket socket;
 	private String ip;
-	Server server = new Server();
-	private int port = server.getRandomNum();
+	private int port;
 	private String user_id;
 	private InputStream is;
 	private OutputStream os;

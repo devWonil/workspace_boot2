@@ -39,7 +39,6 @@ public class Server extends JFrame implements ActionListener {
 	private ServerSocket serverSocket; // 다른 클라이언트 연결 대기 (1000 포트 번호 설정)
 	
 	Vector<UserSocket> sockets = new Vector<>();
-	Client client = new Client();
 	// 그 외 자원
 	private Vector<UserInfo> vc_user = new Vector<UserInfo>();
 	private Vector<RoomInfo> vc_room = new Vector<RoomInfo>();

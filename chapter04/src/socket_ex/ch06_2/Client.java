@@ -75,6 +75,7 @@ public class Client extends JFrame implements ActionListener{
 	private StringTokenizer st;
 	private String my_roomName;
 	
+	UserInfo userInfo;
 	BufferedWriter bufferedWriter; // 소켓에다가 연결할 outputStream
 
 	BufferedReader keyboardBufferedReader; // 키보드에 연결할 스트림
@@ -359,7 +360,7 @@ public class Client extends JFrame implements ActionListener{
 			viewChat_ta.setText("");
 		}else if(protocol.equals("UserOut")) {
 			user_Vclist.remove(message);
-			//userInfo.sendmessage("OutRoom/" + my_roomName);
+			userInfo.sendmessage("OutRoom/" + my_roomName);
 		}else if(protocol.equals("UserData_Update")) {
 			totalList_lst.setListData(user_Vclist);
 			roomList_lst.setListData(roomList_vc);
@@ -410,13 +411,14 @@ public class Client extends JFrame implements ActionListener{
 				// 서버연결하기
 				connectServer();
 				setTitle("선생님 살려주세요ㅠ");
+				
 			}
 		} else if(e.getSource() == confirm_btn) {
 			System.out.println("전송버튼클릭");
 			sendMsgToServer("Chatting/" + my_roomName + "/" + chatting_tf.getText().trim());
 			
 			
-//			userInfo.sendmessage("Chatting/" + my_roomName + "/" + chatting_tf.getText().trim());
+			//userInfo.sendmessage("Chatting/" + my_roomName + "/" + chatting_tf.getText().trim());
 		} else if(e.getSource() == sendNote_btn) {
 			System.out.println("쪽지보내기버튼 클릭");
 			String user = (String) totalList_lst.getSelectedValue();
@@ -425,7 +427,7 @@ public class Client extends JFrame implements ActionListener{
 			}
 			String note = JOptionPane.showInputDialog("보낼메시지");
 			if(note != null) {
-//				userInfo.sendmessage("Note/" + user + "@" + note);
+				//userInfo.sendmessage("Note/" + user + "@" + note);
 				sendMsgToServer("Note/" + user + "@" + note);
 			}
 		}else if(e.getSource() == joinRoom_btn) {
@@ -433,27 +435,27 @@ public class Client extends JFrame implements ActionListener{
 			String joinRoom = (String) roomList_lst.getSelectedValue();
 			btn_outRoom.setEnabled(true);
 			btn_makeRoom.setEnabled(false);
-//			userInfo.sendmessage("JoinRoom/" + joinRoom);
+			//userInfo.sendmessage("JoinRoom/" + joinRoom);
 			sendMsgToServer("JoinRoom/" + joinRoom);
 		}else if(e.getSource() == chatting_tf) {
 			if(chatting_tf.getText().length() == 0) {
 				System.out.println("이게 0값으로 들어가나?");
-//				userInfo.sendmessage("Chatting/" + my_roomName + "/" + chatting_tf.getText() + "   ");
+				//userInfo.sendmessage("Chatting/" + my_roomName + "/" + chatting_tf.getText() + "   ");
 				sendMsgToServer("Chatting/" + my_roomName + "/" + chatting_tf.getText() + "   ");
 			}else {
-//				userInfo.sendmessage("Chatting/" + my_roomName + "/" + chatting_tf.getText());
+				//userInfo.sendmessage("Chatting/" + my_roomName + "/" + chatting_tf.getText());
 				sendMsgToServer("Chatting/" + my_roomName + "/" + chatting_tf.getText());
 			}
 		}else if(e.getSource() == btn_makeRoom) {
 			System.out.println("방생성버튼 클릭");
 			String roomName = JOptionPane.showInputDialog("방 이름을 입력하세요");
 			if(roomName != null) {
-//				userInfo.sendmessage("CreateRoom/" + roomName);
+				//userInfo.sendmessage("CreateRoom/" + roomName);
 				sendMsgToServer("CreateRoom/" + roomName);
 			}
 		}else if(e.getSource() == btn_outRoom) {
 			System.out.println("방나가기 버튼클릭");
-//			userInfo.sendmessage("OutRoom/" + my_roomName);
+			//userInfo.sendmessage("OutRoom/" + my_roomName);
 			sendMsgToServer("OutRoom/" + my_roomName);
 		}else if(e.getSource() == btn_end) {
 			System.exit(0);

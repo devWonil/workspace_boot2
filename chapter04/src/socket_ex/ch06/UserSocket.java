@@ -29,6 +29,7 @@ public class UserSocket extends Thread{
 		}
 	}
 	
+	
 	@Override
 	public void run() {
 		
@@ -40,7 +41,7 @@ public class UserSocket extends Thread{
 					try {
 						String msg = bufferedReader.readLine();
 						System.out.println("서버 --> UserSocket : msg : " + msg);
-						mContext.broadcast(msg);
+						mContext.broadcast(msg); // 널포인터가 뜬다
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -60,4 +61,5 @@ public class UserSocket extends Thread{
 			e.printStackTrace();
 		}
 	}
+	
 }

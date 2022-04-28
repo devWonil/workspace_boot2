@@ -10,7 +10,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -36,15 +35,8 @@ public class Server extends JFrame implements ActionListener {
 	// Network 자원
 	private ServerSocket server_socket;
 	private Socket socket;
-	Random rand = new Random();
-	final int MAXIMUM = 65535;
-	final int MINIMUM = 1024;
-	int randomNum = MINIMUM + rand.nextInt((MAXIMUM - MINIMUM) + 1);
-	private int port = randomNum;
+	private int port;
 
-	public int getRandomNum() {
-		return randomNum;
-	}
 	// 그 외 자원들
 	private Vector<UserInformation> vc = new Vector<UserInformation>();
 	private Vector<RoomInformation> vc_room = new Vector<RoomInformation>();

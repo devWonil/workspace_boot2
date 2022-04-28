@@ -7,7 +7,7 @@ public class RoomInfo extends Thread {
 	public String roomName;
 	Vector<UserInfo> room_user_vc = new Vector<UserInfo>();
 
-	Server server = new Server();
+	Server mContext;
 
 	public RoomInfo(String roomName, UserInfo ui) {
 		this.roomName = roomName;
@@ -36,12 +36,12 @@ public class RoomInfo extends Thread {
 		room_user_vc.remove(ui);
 		boolean empty = room_user_vc.isEmpty();
 		if (empty) {
-			for (int i = 0; i < server.getVc_room().size(); i++) {
-				RoomInfo ri = server.getVc_room().elementAt(i);
+			for (int i = 0; i < mContext.getVc_room().size(); i++) {
+				RoomInfo ri = mContext.getVc_room().elementAt(i);
 				if (ri.roomName.equals(roomName)) {
-					server.getVc_room().remove(this);
-					server.broadcast("EmptyRoom/" + roomName);
-					server.broadcast("UserData_Update/ok");
+					mContext.getVc_room().remove(this);
+					mContext.broadcast("EmptyRoom/" + roomName);
+					mContext.broadcast("UserData_Update/ok");
 					break;
 				}
 			}
