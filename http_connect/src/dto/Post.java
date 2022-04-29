@@ -1,5 +1,8 @@
 package dto;
 
+import lombok.ToString;
+
+@ToString
 public class Post {
 	public int userId;
 	public int id;
