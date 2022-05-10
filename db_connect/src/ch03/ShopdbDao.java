@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import ch02.DBClient;
-
 public class ShopdbDao implements IShopdbDao {
 
 	private DBClient dbClient;
