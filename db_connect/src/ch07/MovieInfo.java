@@ -1,4 +1,4 @@
-package ch06;
+package ch07;
 
 import java.awt.Checkbox;
 import java.awt.event.ActionEvent;
@@ -24,8 +24,10 @@ import javax.swing.table.TableColumnModel;
 import lombok.Data;
 
 @Data
-public class MovieInfo extends JFrame implements ActionListener, ItemListener {
+public class MovieInfo extends JFrame implements ItemListener {
 
+	MovieInfoDao dao;
+	
 	// 카테고리 검색
 	private JPanel searchPanel;
 	private TitledBorder categoryBorder;
@@ -51,10 +53,11 @@ public class MovieInfo extends JFrame implements ActionListener, ItemListener {
 
 	// 영화 테이블
 	String schema[] = { "번호", "이름", "개봉년도", "수익", "관객수", "스크린 수", "평점" };
-
+	
 	public MovieInfo() {
-
 		
+		dao = new MovieInfoDao();
+
 		setBounds(100, 100, 628, 515);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -96,7 +99,7 @@ public class MovieInfo extends JFrame implements ActionListener, ItemListener {
 		releaseDate.setBounds(480, 27, 90, 12);
 		searchPanel.add(releaseDate);
 
-		searchField = new JTextField();
+		searchField = new JTextField("명량");
 		searchField.setBounds(20, 20, 230, 26);
 		searchPanel.add(searchField);
 
@@ -104,7 +107,7 @@ public class MovieInfo extends JFrame implements ActionListener, ItemListener {
 		searchButton.setBounds(280, 20, 70, 25);
 		searchPanel.add(searchButton);
 
-		searchButton.addActionListener(this);
+//		searchButton.addActionListener(this);
 //        releaseDate.addActionListener(this);
 
 		movieName.addItemListener(this);
@@ -117,6 +120,8 @@ public class MovieInfo extends JFrame implements ActionListener, ItemListener {
 		for (int i = 0; i < columnModel.getColumnCount(); i++) {
 			columnModel.getColumn(i).setCellRenderer(defaultTableCellRenderer);
 		}
+		
+		SelectAll();
 
 //        comboBox = new JComboBox();
 //        comboBox.setBounds(146, 40, 100, 20);
@@ -137,37 +142,116 @@ public class MovieInfo extends JFrame implements ActionListener, ItemListener {
 		setVisible(true);
 
 	}
+	
+	public void SelectAll() {
+//		dao.selectAll();
+		for (int i = 0; i < dao.selectAll().size(); i++) {
+			model.addRow(new Object[] {
+					dao.selectAll().get(i).getMovieNumber(), 
+					dao.selectAll().get(i).getMovieName(),
+					dao.selectAll().get(i).getReleasedDate(),
+					dao.selectAll().get(i).getRevenue(),
+					dao.selectAll().get(i).getAudience(),
+					dao.selectAll().get(i).getScreen(),
+					dao.selectAll().get(i).getStarRating()});
+		}
+	}
 
 	// 라디오 버튼
 	@Override
 	public void itemStateChanged(ItemEvent e) {
-
+		
+		
+		
 		// 영화 제목 버튼 클릭됨
 		if (e.getSource() == movieName) {
 			releaseDate.setEnabled(false);
 			// 영화 쿼리 뿌림
-
+			
+			searchButton.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(e.getSource() == searchButton) {
+						dao.selectByMovieName(searchField.getText());
+						
+						if(model.getRowCount() > 0) {
+							for (int i = model.getRowCount() - 1; i > -1; i--) {
+								model.removeRow(i);
+							}
+						}
+						
+						for (int i = 0; i < dao.selectByMovieName(searchField.getText()).size(); i++) {
+							model.addRow(new Object[] {
+									dao.selectByMovieName(searchField.getText()).get(i).getMovieNumber(), 
+									dao.selectByMovieName(searchField.getText()).get(i).getMovieName(),
+									dao.selectByMovieName(searchField.getText()).get(i).getReleasedDate(),
+									dao.selectByMovieName(searchField.getText()).get(i).getRevenue(),
+									dao.selectByMovieName(searchField.getText()).get(i).getAudience(),
+									dao.selectByMovieName(searchField.getText()).get(i).getScreen(),
+									dao.selectByMovieName(searchField.getText()).get(i).getStarRating()
+							});
+						}
+					}
+				}
+			});
+			
+			
+			
 			if (e.getStateChange() == ItemEvent.DESELECTED) {
 				releaseDate.setEnabled(true);
 			}
-		}
-
-		else if (e.getSource() == releaseDate) {
+		} else if (e.getSource() == releaseDate) {
 			movieName.setEnabled(false);
+			
+				searchButton.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(e.getSource() == searchButton) {
+						dao.selectByMovieName(searchField.getText());
+						
+						if(model.getRowCount() > 0) {
+							for (int i = model.getRowCount() - 1; i > -1; i--) {
+								model.removeRow(i);
+							}
+						}
+						
+						for (int i = 0; i < dao.selectByReleasedYear(searchField.getText()).size(); i++) {
+							model.addRow(new Object[] {
+									dao.selectByReleasedYear(searchField.getText()).get(i).getMovieNumber(), 
+									dao.selectByReleasedYear(searchField.getText()).get(i).getMovieName(),
+									dao.selectByReleasedYear(searchField.getText()).get(i).getReleasedDate(),
+									dao.selectByReleasedYear(searchField.getText()).get(i).getRevenue(),
+									dao.selectByReleasedYear(searchField.getText()).get(i).getAudience(),
+									dao.selectByReleasedYear(searchField.getText()).get(i).getScreen(),
+									dao.selectByReleasedYear(searchField.getText()).get(i).getStarRating()
+							});
+						}
+					}
+				}
+			});
+			
+			
+			
+			
 			if (e.getStateChange() == ItemEvent.DESELECTED) {
 				movieName.setEnabled(true);
 			}
 		}
 	}
 
-	// 검색 버튼 누르면
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		MovieInfoDao dao = new MovieInfoDao();
-		if(e.getSource() == searchButton) {
-			dao.selectByMovieName(searchField.getText());
-			
-		}
-	}
+//	@Override
+//	public void actionPerformed(ActionEvent e) {
+//		
+//		if(e.getSource() == searchButton) {
+//			MovieInfoDao dao = new MovieInfoDao();
+//			dao.selectByMovieName(searchField.getText());
+//		}
+//	}
+	
+
+	
+	
 
 }

@@ -1,4 +1,4 @@
-package ch06;
+package ch07;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,10 +16,9 @@ public class MovieInfoDao implements ISelect{
 	private Connection connection;
 	private ResultSet rs = null;
 	
-	
 	private ArrayList<MovieInfoDto> movieInfo;
 	
-	private MovieInfo info = new MovieInfo();
+//	private MovieInfo info = new MovieInfo();
 	
 	public MovieInfoDao() {
 		client = DBClient.getInstance();
@@ -31,6 +30,8 @@ public class MovieInfoDao implements ISelect{
 		
 		 movieInfo = new ArrayList<MovieInfoDto>();
 		
+		 ArrayList<MovieInfoDto> dtoAll = new ArrayList<MovieInfoDto>();
+		 
 		try {
 			String query = "select * from movieTbl";
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -58,11 +59,14 @@ public class MovieInfoDao implements ISelect{
 				dto.setScreen(screen);
 				dto.setStarRating(starRating);
 				
-				movieInfo.add(dto);
+				dtoAll.add(dto);
+				System.out.println(dto);
 				
-				info.getModel().addRow(new Object[] {rs.getInt("movieNumber"),rs.getString("movieName"),
-						rs.getString("releasedDate"), rs.getLong("revenue"), rs.getLong("audience"), 
-						rs.getInt("screen"), rs.getFloat("starRating")});
+//				movieInfo.add(dto);
+				
+//				info.getModel().addRow(new Object[] {rs.getInt("movieNumber"),rs.getString("movieName"),
+//						rs.getString("releasedDate"), rs.getLong("revenue"), rs.getLong("audience"), 
+//						rs.getInt("screen"), rs.getFloat("starRating")});
 				
 				
 			}
@@ -72,7 +76,7 @@ public class MovieInfoDao implements ISelect{
 			e.printStackTrace();
 		}
 		
-		return movieInfo;
+		return dtoAll;
 		
 	}
 	
@@ -81,6 +85,8 @@ public class MovieInfoDao implements ISelect{
 	public ArrayList<MovieInfoDto> selectByMovieName(String movieName) {
 		
 		ArrayList<MovieInfoDto> movieInfo = new ArrayList<MovieInfoDto>();
+		
+		ArrayList<MovieInfoDto> dtoAll = new ArrayList<MovieInfoDto>();
 		
 		try {
 			String query = "SELECT * FROM movieTbl WHERE movieName = ?";
@@ -99,15 +105,12 @@ public class MovieInfoDao implements ISelect{
 				dto.setAudience(rs.getLong("audience"));
 				dto.setStarRating(rs.getFloat("starRating"));
 				
-				movieInfo.add(dto);
+				dtoAll.add(dto);
 				
-				info.getModel().addRow(
-						new Object[] {
-						rs.getInt("movieNumber"),rs.getString("movieName"),
-						rs.getString("releasedDate"), rs.getLong("revenue"), rs.getLong("audience"), 
-						rs.getInt("screen"), rs.getFloat("starRating")
-						});
-				
+//				info.getModel().addRow(new Object[] {rs.getInt("movieNumber"),rs.getString("movieName"),
+//						rs.getString("releasedDate"), rs.getLong("revenue"), rs.getLong("audience"), 
+//						rs.getInt("screen"), rs.getFloat("starRating")});
+//				
 				
 			}
 		} catch (SQLException e) {
@@ -115,17 +118,19 @@ public class MovieInfoDao implements ISelect{
 			e.printStackTrace();
 		}
 		
-		return movieInfo;
+		return dtoAll;
 		
 	}
+	
 	
 	
 	@Override
 	public ArrayList<MovieInfoDto> selectByReleasedYear(String releasedYear) {
 		
 		ArrayList<MovieInfoDto> movieInfo = new ArrayList<MovieInfoDto>();
+		ArrayList<MovieInfoDto> dtoAll = new ArrayList<MovieInfoDto>();
 		try {
-			String query = "SELECT * FROM 영화정보 WHERE 개봉년도 = ?";
+			String query = "SELECT * FROM movietbl WHERE releasedDate = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, releasedYear);
 			rs = preparedStatement.executeQuery();
@@ -140,14 +145,14 @@ public class MovieInfoDao implements ISelect{
 				dto.setAudience(rs.getLong("audience"));
 				dto.setStarRating(rs.getFloat("starRating"));
 				
-				movieInfo.add(dto);
+				dtoAll.add(dto);;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return movieInfo;
+		return dtoAll;
 		
 	}
 	
@@ -155,3 +160,4 @@ public class MovieInfoDao implements ISelect{
 	
 	
 }
+

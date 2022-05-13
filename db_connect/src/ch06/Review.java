@@ -3,6 +3,7 @@ package ch06;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,10 +23,12 @@ public class Review extends JFrame {
 	private JTextArea textArea;
 	private JTextField textField;
 	private JTextField textField1;
+	private JTextField textField3;
 	private JPanel jPanel;
 	private JLabel jLabel;
 	private JLabel jLabel1;
 	private JLabel jLabel2;
+	private JLabel jLabel3;
 	private JButton btn;
 
 	// 영화 조회
@@ -56,10 +59,12 @@ public class Review extends JFrame {
 		for (int i = 0; i < columnModel.getColumnCount(); i++) {
 			columnModel.getColumn(i).setCellRenderer(defaultTableCellRenderer);
 		}
-		
+				
 		jPanel = new JPanel();
+		jLabel3 = new JLabel("닉네임");
+		textField3 = new JTextField(5);
 		jLabel = new JLabel("영화");
-		textField1 = new JTextField(30);
+		textField1 = new JTextField(20);
 		jLabel1 = new JLabel("평점");
 		textField = new JTextField(" /10", 5);
 		jLabel2 = new JLabel("영화리뷰");
@@ -68,6 +73,8 @@ public class Review extends JFrame {
 
 		setVisible(true);
 		jPanel.add(scrollPane);
+		jPanel.add(jLabel3);
+		jPanel.add(textField3);
 		jPanel.add(jLabel);
 		jPanel.add(textField1);
 		jPanel.add(jLabel1);
@@ -75,6 +82,7 @@ public class Review extends JFrame {
 		jPanel.add(jLabel2);
 		jPanel.add(textArea);
 		jPanel.add(btn);
+		
 
 		add(jPanel, FlowLayout.LEFT);
 
@@ -84,9 +92,11 @@ public class Review extends JFrame {
 	private void setEventListener() {
 		btn.addActionListener(new ActionListener() {
 
+			// 저장 버튼 누르면
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("평점 / 리뷰 저장완료");
+				ReviewList reviewList = new ReviewList();
 			}
 		});
 	}
