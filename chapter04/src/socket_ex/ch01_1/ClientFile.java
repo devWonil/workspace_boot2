@@ -1,4 +1,4 @@
-package socket_ex.ch02;
+package socket_ex.ch01_1;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,7 +12,7 @@ public class ClientFile {
 
 	Socket socket;
 	BufferedWriter bufferedWriter; // 소켓에다가 연결할 outputStream
-	final String IP = "localhost"; // 자기자신을 나타내는 주소 (127.0.0.1)
+	final String IP = "localhost";
 	final int PORT = 10000;
 	
 	BufferedReader keyboardBufferedReader; // 키보드에 연결할 스트림
@@ -30,17 +30,13 @@ public class ClientFile {
 			System.out.println("3. 키보드 버퍼 연결");
 			keyboardBufferedReader = new BufferedReader(new InputStreamReader(System.in));
 			
-			while(true) {
-				System.out.println("4. 키보드 입력 대기");
-				String msg = keyboardBufferedReader.readLine(); // 입력 대기중 ...
-				// 사용자 문자열을 받았으면 보내야 한다
-				// 중요 : 메세지 끝을 알려야 한다
-				bufferedWriter.write(msg + "\n");
-				bufferedWriter.flush();
-
-			}
+			System.out.println("4. 키보드 입력 대기");
+			String msg = keyboardBufferedReader.readLine(); //입력 대기중
 			
-			
+			// 사용자 문자열을 받았으면 보내야 한다
+			// 중요 : 메세지 끝을 알려야 한다
+			bufferedWriter.write(msg + "\n");
+			bufferedWriter.flush();
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,5 +49,4 @@ public class ClientFile {
 	public static void main(String[] args) {
 		new ClientFile();
 	}
-
 }
