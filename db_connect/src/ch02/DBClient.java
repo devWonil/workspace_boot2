@@ -11,7 +11,7 @@ public class DBClient {
 
 	private static final String DB_HOST = "localhost";
 	private static final int DB_PORT = 3306;
-	private static final String DB_DATABASE_NAME = "employees";
+	private static final String DB_DATABASE_NAME = "shopdb";
 	private static final String DB_USER_NAME = "root";
 	private static final String DB_CHARSET = "UTF-8";
 	private static final String DB_PASSWORD = "asd123";
